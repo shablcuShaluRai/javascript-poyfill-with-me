@@ -3,11 +3,11 @@ let person = {
   lname: "lname"
 };
 
-function getPersonDetails() {
-  return this.fname + " " + this.lname;
+function getPersonDetails(greet) {
+  return greet + " " + this.fname + " " + this.lname;
 }
 
-const personDetails = getPersonDetails.bind(person);
+const personDetails = getPersonDetails.bind(person, "Hello");
 
 console.log("personDetails", personDetails());
 
@@ -18,7 +18,19 @@ Function.prototype.customBind = function (...args) {
     return obj.apply(args[0], [...restParams, arg]);
   };
 };
-
-const customPersonDetails = getPersonDetails.customBind(person);
+const customPersonDetails = getPersonDetails.customBind(person, "Hi");
 
 console.log("personDetails", customPersonDetails());
+
+// Another way to writ polyfill of bind function
+Function.prototype.customBinding = function (scope, ...args) {
+  console.log("scope", scope, args);
+  scope.this = this;
+  return function () {
+    return scope.this(...args);
+  };
+};
+
+const customPersonDetailss = getPersonDetails.customBinding(person, "Hiii");
+
+console.log("personDetails", customPersonDetailss());

@@ -103,3 +103,24 @@ deepCopyObj.b.c = 230;
 deepCopyObj.a = 200;
 console.log("obj3", obj3);
 console.log("deepCopy", deepCopyObj);
+
+// destructure the object:
+
+// spread operator makes deep copy, you can not modified reference obj
+
+const objDestruct = {
+  a: 1,
+  b: 2,
+  c: 3,
+  d: {
+    e: 9
+  }
+};
+
+const copyObjectDestruct = { ...objDestruct };
+// objDestruct.c = 10;
+objDestruct.d.e = 100;
+copyObjectDestruct.c = 90;
+console.log("objDestruct", objDestruct);
+
+console.log("copyObjectDestruct", copyObjectDestruct);

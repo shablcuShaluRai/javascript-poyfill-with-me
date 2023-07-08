@@ -74,3 +74,21 @@ console.log("max call", Math.max.call(1, 8, 2, 3, 4, 5));
 console.log("max call", Math.max.apply(null, [1, 8, 2, 3, 4, 5]));
 const dt = Math.max.bind(this);
 console.log("bind example", dt(1, 3, 4, 5, 6, 7));
+
+const cat = {
+  name: "cat",
+  breed: "breed",
+  greeting: function () {
+    console.log(`cat ${this.name} of this ${this.breed}`);
+  }
+};
+
+const cat2 = {
+  name: "cat2",
+  breed: "breed2"
+};
+
+const catInstance = cat.greeting.bind(cat);
+// if will pass this here it won't work
+// const catInstance = cat.greeting.bind(this);
+catInstance(cat2);
